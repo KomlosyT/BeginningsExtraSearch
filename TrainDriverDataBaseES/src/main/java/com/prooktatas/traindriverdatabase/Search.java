@@ -256,12 +256,7 @@ public class Search extends javax.swing.JFrame implements ActionListener
             tableModel.addRow(row); // Új sorok hozzáadása
         }
     }
-    /*
-    private boolean isNameValid(String name) 
-    {
-        return name.matches("[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\\-\\s]+");
-    }
-    */
+
     public static void centerWindow(JFrame frame) 
     {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
