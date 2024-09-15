@@ -418,13 +418,15 @@ public class DB
         ArrayList<String> conditions = new ArrayList<>();
         ArrayList<Object> parameters = new ArrayList<>();
 
-        // Add conditions based on non-null and non-empty inputs
-        if (lastName != null && !lastName.trim().isEmpty()) {
+
+        if (lastName != null && !lastName.trim().isEmpty()) 
+        {
             conditions.add("LOWER(lastName) LIKE LOWER(?)");
             parameters.add("%" + lastName + "%");
         }
         
-        if (firstName != null && !firstName.trim().isEmpty()) {
+        if (firstName != null && !firstName.trim().isEmpty()) 
+        {
             conditions.add("LOWER(firstName) LIKE LOWER(?)");
             parameters.add("%" + firstName + "%");
         }
@@ -432,36 +434,43 @@ public class DB
             conditions.add("age = ?");
             parameters.add(age);
         }
-        if (category != null && !category.trim().isEmpty()) {
+        if (category != null && !category.trim().isEmpty()) 
+        {
             conditions.add("LOWER(category) LIKE LOWER(?)");
             parameters.add("%" + category + "%");
         }
-        if (type != null && !type.trim().isEmpty()) {
+        if (type != null && !type.trim().isEmpty()) 
+        {
             conditions.add("LOWER(type) LIKE LOWER(?)");
             parameters.add("%" + type + "%");
         }
-        if (line != null && !line.trim().isEmpty()) {
+        if (line != null && !line.trim().isEmpty()) 
+        {
             conditions.add("LOWER(line) LIKE LOWER(?)");
             parameters.add("%" + line + "%");
         }
 
         String sql = "SELECT * FROM tds";
-        if (!conditions.isEmpty()) {
+        if (!conditions.isEmpty()) 
+        {
             sql += " WHERE " + String.join(" AND ", conditions); // Dynamically build the WHERE clause
         }
 
-        try {
+        try 
+        {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
 
-            // Set parameters in the prepared statement
-            for (int i = 0; i < parameters.size(); i++) {
+
+            for (int i = 0; i < parameters.size(); i++) 
+            {
                 preparedStatement.setObject(i + 1, parameters.get(i));
             }
 
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Process the result set and create TD objects
-            while (rs.next()) {
+
+            while (rs.next()) 
+            {
                 TD currentTD = new TD(
                         rs.getString("lastName"),
                         rs.getString("firstName"),
@@ -471,7 +480,9 @@ public class DB
                         rs.getString("line"));
                 tds.add(currentTD);
             }
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) 
+        {
             System.out.println("Valami baj van a keresés során!");
             System.out.println("" + ex);
         }
